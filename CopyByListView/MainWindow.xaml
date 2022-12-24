@@ -1,0 +1,27 @@
+﻿<Window x:Class="CopyByListView.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CopyByListView"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <ListView Name="listView" 
+                  HorizontalContentAlignment="Stretch"
+                  ItemsSource="{Binding MyList}">
+            <ListView.InputBindings>
+                <KeyBinding Gesture="Ctrl+C" 
+                    Command="{Binding CopyCommand}"
+                    CommandParameter="{Binding ElementName=listView, Path=SelectedItem.Full}"/>
+            </ListView.InputBindings>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="上の句" DisplayMemberBinding="{Binding FirstHalf}"/>
+                    <GridViewColumn Header="下の句" DisplayMemberBinding="{Binding LastHalf}"/>
+                    <GridViewColumn Header="詠み人" DisplayMemberBinding="{Binding Writer}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>
